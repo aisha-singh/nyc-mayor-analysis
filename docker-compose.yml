@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: ./apps/web
+      target: dev
+    environment:
+      NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: ${NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
+      # FE -> BE proxy for your Next.js route handlers, if you use them
+      ANALYTICS_URL: http://fastapi:8001
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+    depends_on:
+      - fastapi
+
+  fastapi:
+    build:
+      context: ./apps/py-analytics
+      target: dev
+    environment:
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./apps/py-analytics:/app
+      # cache Poetry downloads between rebuilds (speeds up installs)
+      - poetry-cache:/root/.cache/pypoetry
+
+volumes:
+  poetry-cache:

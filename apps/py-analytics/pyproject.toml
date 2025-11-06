@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "py-analytics"
+version = "0.1.0"
+description = "FastAPI backend for the newsroom analytics"
+authors = ["Enjui Chang <enjui.chang@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "py_analytics" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+# web stack
+fastapi = "^0.115"
+pydantic = "^2.12"
+uvicorn = { version = "0.38.0", extras = ["standard"] }  # proper extras syntax
+
+# data / geo (safe core first)
+pandas = "^2.3"
+shapely = "^2.0"
+pyproj = "^3.6"
+pandera = "^0.26"
+
+# bring this back later after GDAL/GEOS/PROJ are set up:
+geopandas = "^1.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+httpx = "*"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
