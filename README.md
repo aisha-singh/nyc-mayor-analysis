@@ -12,9 +12,7 @@ nyc-mayor-analysis/
 ├─ apps/
 │  ├─ web/             → Next.js frontend + lightweight backend (Node)
 │  └─ py-analytics/    → FastAPI backend for analytics & geo tasks (Python)
-├─ docker-compose.yml  → orchestrates both services
-├─ packages/           → optional workspace for shared libraries (currently empty)
-└─ package.json        → root manifest for pnpm workspace
+└─ docker-compose.yml  → orchestrates both services
 ```
 
 ---
@@ -73,7 +71,6 @@ JSON/GeoJSON response → rendered on Mapbox
 |---------|--------------|
 | `apps/web` | Next.js frontend & API routes |
 | `apps/py-analytics` | FastAPI backend service |
-| `packages/` | Reserved for shared TS/ESLint/config packages |
 | `docker-compose.yml` | Builds both services & links them |
 | `.env` | Holds environment variables (Mapbox token, backend URL) |
 
