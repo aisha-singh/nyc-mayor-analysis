@@ -1,16 +1,16 @@
 'use client';
 
-import {useEffect, useRef} from 'react';
+import { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
-import {MapboxOverlay} from '@deck.gl/mapbox';
-import {makeDeckLayers} from '@/lib/map/deckLayers';
-import {registerPmtilesProtocol} from '@/lib/map/pmtiles';
+import { MapboxOverlay } from '@deck.gl/mapbox';
+import { makeDeckLayers } from '@/lib/map/deckLayers';
+import { registerPmtilesProtocol } from '@/lib/map/pmtiles';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN!;
 
 export default function MapView() {
-  const containerRef = useRef<HTMLDivElement|null>(null);
-  const mapRef = useRef<mapboxgl.Map|null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<mapboxgl.Map | null>(null);
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -25,17 +25,23 @@ export default function MapView() {
       attributionControl: false
     });
 
-    map.addControl(new mapboxgl.NavigationControl({visualizePitch: true}));
+    map.addControl(new mapboxgl.NavigationControl({ visualizePitch: true }));
     map.addControl(new mapboxgl.AttributionControl({
       compact: true,
       customAttribution: '© OpenStreetMap contributors'
     }));
 
-    const overlay = new MapboxOverlay({interleaved: true, layers: makeDeckLayers()});
+    const overlay = new MapboxOverlay({ interleaved: true, layers: makeDeckLayers() });
     map.addControl(overlay);
 
     mapRef.current = map;
-    return () => { overlay.remove(); map.remove(); mapRef.current = null; };
+    return () => {
+      // @ts-ignore
+      overlay.remove();
+      // @ts-ignore
+      map.remove();
+      mapRef.current = null;
+    };
   }, []);
 
   return <div ref={containerRef} className="h-full w-full" />;

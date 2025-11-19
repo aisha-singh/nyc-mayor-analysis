@@ -31,22 +31,26 @@ nyc-mayor-analysis/
 ## 🐳 Running with Docker
 
 ### 1️⃣ Prerequisites
+
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 - [Mapbox account + access token](https://account.mapbox.com/)
 
 ### 2️⃣ Set up environment
+
 Create a `.env` file at the repo root:
+
 ```bash
 NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=your_mapbox_token_here
 ANALYTICS_URL=http://fastapi:8001
 ```
 
 ### 3️⃣ Build & start
+
 ```bash
 docker compose up --build
 ```
 
-- **Next.js app:** http://localhost:3000  
+- **Next.js app:** http://localhost:3000
 - **FastAPI docs:** http://localhost:8001/docs
 
 ---
@@ -79,10 +83,10 @@ JSON/GeoJSON response → rendered on Mapbox
 ## 🧭 Development Notes
 
 - Hot reload works for both containers (Next.js + FastAPI).
-- Each service is isolated — Node deps are in the `web` image, Python deps in the `py-analytics` image.
-- Use `suppressHydrationWarning` in `layout.tsx` to silence Grammarly/extension hydration mismatches.
+- Each service is isolated — Node deps are in the `web` image.
 
 ---
 
 ## 📄 License
+
 MIT License © 2025

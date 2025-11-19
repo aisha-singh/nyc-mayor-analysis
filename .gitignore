@@ -87,6 +87,9 @@ temp/
 *.orig
 *.rej
 
+# ggshield
+.cache_ggshield
+
 # Packages (monorepo)
 packages/*/node_modules
 apps/*/node_modules
